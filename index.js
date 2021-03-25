@@ -59,8 +59,8 @@ function convertImage( src, options){
             canvas.width = width;
             canvas.height = height;
             ctx.scale(-1, 1);
-            // ctx.drawImage(img, 0, 0);
-            ctx.drawImage(img, width*-1, 0, width, height); // draw the image
+            ctx.drawImage(img, 0, 0);
+            // ctx.drawImage(img, width*-1, 0, width, height); // draw the image
             const data = ctx.getImageData(0, 0, width, height);
             processImage(data,options).then(x=>{
                 resolve(x)
