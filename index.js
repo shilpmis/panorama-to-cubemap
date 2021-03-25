@@ -58,7 +58,9 @@ function convertImage( src, options){
             const { width, height } = img;
             canvas.width = width;
             canvas.height = height;
-            ctx.drawImage(img, 0, 0);
+            ctx.scale(-1, 1);
+            // ctx.drawImage(img, 0, 0);
+            ctx.drawImage(img, width*-1, 0, width, height); // draw the image
             const data = ctx.getImageData(0, 0, width, height);
             processImage(data,options).then(x=>{
                 resolve(x)
@@ -103,12 +105,12 @@ function processFace(data,options,facename){
 function processImage(data, options) {
     return new Promise(resolve => {
         Promise.all([
-            processFace(data, options, "pz"),
-            processFace(data, options, "nz"),
-            processFace(data, options, "px"),
-            processFace(data, options, "nx"),
-            processFace(data, options, "py"),
-            processFace(data, options, "ny")
+            processFace(data, options, "right"),
+            processFace(data, options, "left"),
+            processFace(data, options, "back"),
+            processFace(data, options, "front"),
+            processFace(data, options, "top"),
+            processFace(data, options, "bottom")
         ]).then(x=>{
             resolve(x);
         });
